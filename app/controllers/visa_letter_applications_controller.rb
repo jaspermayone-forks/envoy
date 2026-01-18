@@ -23,11 +23,13 @@ class VisaLetterApplicationsController < ApplicationController
     if @participant.save
       existing_application = @participant.visa_letter_applications.find_by(event: @event)
 
-      if existing_application
+      if existing_application && !existing_application.rejected?
         redirect_to verify_email_visa_letter_application_path(existing_application),
                     notice: "You already have an application for this event. Please verify your email."
         return
       end
+
+      existing_application&.destroy if existing_application&.rejected?
 
       @application = @participant.visa_letter_applications.build(event: @event)
 
@@ -109,6 +111,20 @@ class VisaLetterApplicationsController < ApplicationController
       redirect_to verify_email_visa_letter_application_path(@application),
                   alert: "Please wait before requesting a new code."
     end
+  end
+
+  def resend_letter
+    @application = VisaLetterApplication.find(params[:id])
+
+    unless @application.letter_sent?
+      redirect_to visa_letter_application_path(@application), alert: "Letter has not been sent yet."
+      return
+    end
+
+    ApplicationMailer.visa_letter_approved(@application).deliver_later
+
+    redirect_to visa_letter_application_path(@application),
+                notice: "Visa letter has been resent to #{@application.participant.email}."
   end
 
   def lookup

@@ -26,7 +26,7 @@ class Admin::AdminsController < Admin::BaseController
         admin: current_admin,
         request: request
       )
-      redirect_to admin_admins_path, notice: "Admin was successfully created."
+      redirect_to admin_admins_path, notice: "Admin was successfully created. They can now sign in with Hack Club."
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,15 +39,12 @@ class Admin::AdminsController < Admin::BaseController
   def update
     authorize @admin
 
-    update_params = admin_params
-    update_params = update_params.except(:password, :password_confirmation) if update_params[:password].blank?
-
-    if @admin.update(update_params)
+    if @admin.update(admin_params)
       ActivityLog.log!(
         trackable: @admin,
         action: "admin_updated",
         admin: current_admin,
-        metadata: { changes: @admin.previous_changes.except("encrypted_password", "updated_at") },
+        metadata: { changes: @admin.previous_changes.except("updated_at") },
         request: request
       )
       redirect_to admin_admins_path, notice: "Admin was successfully updated."
@@ -82,7 +79,7 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def admin_params
-    permitted = [ :first_name, :last_name, :email, :password, :password_confirmation ]
+    permitted = [ :first_name, :last_name, :email ]
     permitted << :super_admin if current_admin.super_admin?
     params.require(:admin).permit(permitted)
   end

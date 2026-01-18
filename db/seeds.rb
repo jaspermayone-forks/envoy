@@ -4,12 +4,10 @@ admin = Admin.find_or_initialize_by(email: ENV.fetch("ADMIN_EMAIL", "admin@hackc
 admin.assign_attributes(
   first_name: ENV.fetch("ADMIN_FIRST_NAME", "Admin"),
   last_name: ENV.fetch("ADMIN_LAST_NAME", "User"),
-  password: ENV.fetch("ADMIN_PASSWORD", "password123"),
-  password_confirmation: ENV.fetch("ADMIN_PASSWORD", "password123"),
   super_admin: true
 )
 admin.save!
-puts "Created admin: #{admin.email}"
+puts "Created admin: #{admin.email} (will be linked on first Hack Club login)"
 
 default_template_body = <<~TEMPLATE
   To Whom It May Concern,

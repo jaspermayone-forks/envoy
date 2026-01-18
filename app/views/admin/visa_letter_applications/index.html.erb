@@ -9,6 +9,12 @@
                          class: "w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" %>
     </div>
     <div>
+      <%= select_tag :event_id, options_for_select(
+        [["All Events", ""]] + policy_scope(Event).order(:name).map { |e| [e.name, e.id] },
+        params[:event_id]
+      ), class: "border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" %>
+    </div>
+    <div>
       <%= select_tag :status, options_for_select([
         ["All Statuses", ""],
         ["Pending Verification", "pending_verification"],
@@ -20,7 +26,7 @@
     </div>
     <div>
       <%= submit_tag "Filter", class: "bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 cursor-pointer" %>
-      <% if params[:search].present? || params[:status].present? %>
+      <% if params[:search].present? || params[:status].present? || params[:event_id].present? %>
         <%= link_to "Clear", admin_visa_letter_applications_path, class: "ml-2 text-gray-500 hover:text-gray-700" %>
       <% end %>
     </div>

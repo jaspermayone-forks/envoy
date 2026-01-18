@@ -30,25 +30,6 @@
         class: "w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" %>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <%= f.label :password, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.password_field :password, autocomplete: "new-password",
-          required: admin.new_record?,
-          class: "w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" %>
-      <% unless admin.new_record? %>
-        <p class="text-xs text-gray-500 mt-1">Leave blank to keep current password</p>
-      <% end %>
-    </div>
-
-    <div>
-      <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password",
-          required: admin.new_record?,
-          class: "w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500" %>
-    </div>
-  </div>
-
   <% if current_admin.super_admin? && admin != current_admin %>
     <div class="flex items-center">
       <%= f.check_box :super_admin, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>

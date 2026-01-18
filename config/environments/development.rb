@@ -47,6 +47,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
+  # Run jobs immediately in development (skip Sidekiq/Redis)
+  config.active_job.queue_adapter = :async
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

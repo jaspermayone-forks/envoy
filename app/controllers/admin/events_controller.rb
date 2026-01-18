@@ -77,10 +77,12 @@ class Admin::EventsController < Admin::BaseController
     end
 
     def event_params
-      params.require(:event).permit(
+      permitted = [
         :name, :slug, :description, :venue_name, :venue_address,
         :city, :country, :start_date, :end_date, :application_deadline,
         :contact_email, :active, :applications_open
-      )
+      ]
+      permitted << :admin_id if current_admin.super_admin?
+      params.require(:event).permit(permitted)
     end
 end

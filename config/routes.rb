@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   devise_for :admins, path: "admin", path_names: {
     sign_in: "login",
     sign_out: "logout"
-  }
+  }, controllers: {
+    omniauth_callbacks: "admins/omniauth_callbacks",
+    sessions: "admins/sessions"
+  }, skip: [:passwords, :registrations]
+
+  devise_scope :admin do
+    get "admin/login", to: "admins/sessions#new", as: :new_admin_session
+    delete "admin/logout", to: "admins/sessions#destroy", as: :destroy_admin_session
+  end
 
   root "events#index"
 
@@ -20,6 +28,7 @@ Rails.application.routes.draw do
       get :verify_email
       post :confirm_verification
       post :resend_verification
+      post :resend_letter
     end
   end
 
