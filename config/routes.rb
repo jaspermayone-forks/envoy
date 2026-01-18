@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }, controllers: {
     omniauth_callbacks: "admins/omniauth_callbacks",
     sessions: "admins/sessions"
-  }, skip: [:passwords, :registrations]
+  }, skip: [ :passwords, :registrations ]
 
   devise_scope :admin do
     get "admin/login", to: "admins/sessions#new", as: :new_admin_session
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   root "events#index"
 
-  resources :events, only: [:index], param: :slug do
+  resources :events, only: [ :index ], param: :slug do
     member do
       get :show, path: ""
     end
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get "events/:event_slug/apply", to: "visa_letter_applications#new", as: :new_event_application
   post "events/:event_slug/apply", to: "visa_letter_applications#create", as: :event_applications
 
-  resources :visa_letter_applications, only: [:show] do
+  resources :visa_letter_applications, only: [ :show ] do
     member do
       get :verify_email
       post :confirm_verification
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index", as: :dashboard
 
     resources :events
-    resources :visa_letter_applications, only: [:index, :show] do
+    resources :visa_letter_applications, only: [ :index, :show ] do
       member do
         post :approve
         post :reject

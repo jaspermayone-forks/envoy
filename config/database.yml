@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: envoy_production
-  username: envoy
-  password: <%= ENV["ENVOY_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

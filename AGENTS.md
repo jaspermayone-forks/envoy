@@ -42,7 +42,7 @@ bundle exec brakeman
 
 ## Architecture
 
-- **Framework**: Rails 7.2 with PostgreSQL
+- **Framework**: Rails 8.1 with PostgreSQL
 - **Background Jobs**: Sidekiq with Redis
 - **PDF Generation**: Prawn
 - **Styling**: Tailwind CSS 4.x

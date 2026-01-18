@@ -12,7 +12,7 @@ class CreateActivityLogs < ActiveRecord::Migration[7.2]
       t.datetime :created_at, null: false
     end
 
-    add_index :activity_logs, [:trackable_type, :trackable_id]
+    add_index :activity_logs, [ :trackable_type, :trackable_id ]
     add_index :activity_logs, :action
     add_index :activity_logs, :created_at
   end

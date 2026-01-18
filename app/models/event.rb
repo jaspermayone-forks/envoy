@@ -35,7 +35,7 @@ class Event < ApplicationRecord
   end
 
   def full_address
-    [venue_name, venue_address, city, country].compact.join(", ")
+    [ venue_name, venue_address, city, country ].compact.join(", ")
   end
 
   def date_range

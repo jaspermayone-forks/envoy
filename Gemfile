@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.2.8"
 
-gem "rails", "~> 7.2.3"
+gem "rails", "~> 8.1.0"
 gem "sprockets-rails"
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
@@ -25,6 +25,12 @@ gem "pundit"
 
 # Background Jobs
 gem "sidekiq"
+
+# Email
+gem "postmark-rails"
+
+# Cloud Storage (Cloudflare R2)
+gem "aws-sdk-s3", require: false
 
 # PDF Generation
 gem "grover"
@@ -53,4 +59,3 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
-

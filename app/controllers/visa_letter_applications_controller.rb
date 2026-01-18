@@ -1,6 +1,6 @@
 class VisaLetterApplicationsController < ApplicationController
-  before_action :set_event, only: [:new, :create]
-  before_action :set_application, only: [:show]
+  before_action :set_event, only: [ :new, :create ]
+  before_action :set_application, only: [ :show ]
 
   def new
     unless @event.accepting_applications?
@@ -97,9 +97,9 @@ class VisaLetterApplicationsController < ApplicationController
     else
       flash.now[:alert] = if @participant.verification_code_expired?
                             "Your verification code has expired. Please request a new one."
-                          else
+      else
                             "Invalid verification code. Please try again."
-                          end
+      end
       render :verify_email, status: :unprocessable_entity
     end
   end

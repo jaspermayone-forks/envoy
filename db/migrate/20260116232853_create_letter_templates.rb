@@ -13,6 +13,6 @@ class CreateLetterTemplates < ActiveRecord::Migration[7.2]
     end
 
     add_index :letter_templates, :is_default
-    add_index :letter_templates, [:event_id, :active]
+    add_index :letter_templates, [ :event_id, :active ]
   end
 end

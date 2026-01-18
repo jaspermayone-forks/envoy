@@ -18,7 +18,7 @@ class CreateVisaLetterApplications < ActiveRecord::Migration[7.2]
 
     add_index :visa_letter_applications, :status
     add_index :visa_letter_applications, :reference_number, unique: true
-    add_index :visa_letter_applications, [:participant_id, :event_id], unique: true
+    add_index :visa_letter_applications, [ :participant_id, :event_id ], unique: true
     add_index :visa_letter_applications, :submitted_at
   end
 end

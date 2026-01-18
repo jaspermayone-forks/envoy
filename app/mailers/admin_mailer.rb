@@ -7,7 +7,7 @@ class AdminMailer < ActionMailer::Base
     @participant = application.participant
     @event = application.event
 
-    recipients = [@event.contact_email]
+    recipients = [ @event.contact_email ]
     recipients += Admin.where(super_admin: true).pluck(:email)
     recipients = recipients.uniq.compact
 

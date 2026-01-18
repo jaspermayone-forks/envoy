@@ -1,5 +1,5 @@
 class Admin::LetterTemplatesController < Admin::BaseController
-    before_action :set_letter_template, only: [:show, :edit, :update, :destroy, :set_default]
+    before_action :set_letter_template, only: [ :show, :edit, :update, :destroy, :set_default ]
 
     def index
       @letter_templates = policy_scope(LetterTemplate).includes(:event).order(created_at: :desc)
