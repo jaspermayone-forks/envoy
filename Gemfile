@@ -60,3 +60,6 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
+
+gem "sentry-ruby", "~> 6.3"
+gem "sentry-rails", "~> 6.3"
