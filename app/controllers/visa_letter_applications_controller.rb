@@ -133,6 +133,26 @@ class VisaLetterApplicationsController < ApplicationController
                 notice: "Visa letter has been resent to #{@application.participant.email}."
   end
 
+  def download_letter
+    @application = VisaLetterApplication.find(params[:id])
+    token = params[:token]
+
+    unless token.present? && ActiveSupport::SecurityUtils.secure_compare(token, @application.verification_code)
+      redirect_to root_path, alert: "Invalid or expired download link."
+      return
+    end
+
+    unless @application.letter_pdf.attached?
+      redirect_to root_path, alert: "Letter not available."
+      return
+    end
+
+    send_data @application.letter_pdf.download,
+              filename: "visa_letter_#{@application.reference_number}.pdf",
+              type: "application/pdf",
+              disposition: "attachment"
+  end
+
   def lookup
   end
 

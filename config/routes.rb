@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post :confirm_verification
       post :resend_verification
       post :resend_letter
+      get :download_letter
     end
   end
 

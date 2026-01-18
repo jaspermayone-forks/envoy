@@ -27,10 +27,10 @@ class ApplicationMailer < ActionMailer::Base
     @application = application
     @participant = application.participant
     @event = application.event
-
-    if application.letter_pdf.attached?
-      attachments["visa_letter_#{application.reference_number}.pdf"] = application.letter_pdf.download
-    end
+    @download_url = download_letter_visa_letter_application_url(
+      application,
+      token: application.verification_code
+    )
 
     mail(
       to: @participant.email,

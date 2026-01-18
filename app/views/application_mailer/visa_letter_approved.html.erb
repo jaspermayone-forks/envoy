@@ -4,7 +4,13 @@
 
 <p>Great news! Your visa letter application for <strong><%= @event.name %></strong> has been approved.</p>
 
-<p>Your official visa invitation letter is attached to this email as a PDF document.</p>
+<p>
+  <a href="<%= @download_url %>" style="display: inline-block; background-color: #ec3750; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+    Download Your Visa Letter (PDF)
+  </a>
+</p>
+
+<p><small>Or copy this link: <%= @download_url %></small></p>
 
 <h2>Event Details</h2>
 <ul>

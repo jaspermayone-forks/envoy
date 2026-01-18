@@ -4,7 +4,8 @@ Hello <%= @participant.full_name %>,
 
 Great news! Your visa letter application for <%= @event.name %> has been approved.
 
-Your official visa invitation letter is attached to this email as a PDF document.
+Download your visa letter here:
+<%= @download_url %>
 
 Event Details
 - Event: <%= @event.name %>
