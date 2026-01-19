@@ -5,6 +5,11 @@ if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
   export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
 fi
 
+# Debug: verify node is available (for Grover PDF generation)
+echo "Node path: $(which node 2>/dev/null || echo 'NOT FOUND')"
+echo "Node version: $(node --version 2>/dev/null || echo 'NOT AVAILABLE')"
+echo "PATH: $PATH"
+
 # Support PROCESS_TYPE for running different services from same image
 if [ "$PROCESS_TYPE" == "sidekiq" ]; then
   exec bundle exec sidekiq -C config/sidekiq.yml
