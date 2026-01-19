@@ -1,4 +1,10 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  authenticate :admin do
+    mount Sidekiq::Web => "/admin/sidekiq"
+  end
+
   devise_for :admins, path: "admin", path_names: {
     sign_in: "login",
     sign_out: "logout"
